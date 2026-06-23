@@ -20,7 +20,7 @@ class PublicNetworkingClient(cmd.Cmd):
 
     def __init__(self):
         super().__init__()
-        self.server_url = "https://hellker120.pythonanywhere.com/process"  # adjust if needed
+        self.server_url = "http://127.0.0.1:5000/process"  # adjust if needed
         self.session = requests.Session()
         self.current_token = None
 
