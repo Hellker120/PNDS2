@@ -1,0 +1,145 @@
+						[[PNDS2]]
+
+
+PNDS2 (Public Networking Data System 2) is a lightweight file storage and communication protocol built on top of HTTP and Flask.
+
+The project began as a simple way to transfer files between devices and gradually evolved into a token-based storage system with ownership and permission management.
+
+-------------<<Features>>
+
+- Create public files
+- Claim ownership of files
+- Owner/Admin permission hierarchy
+- Read, Write, and Append permissions
+- Per-file token management
+- Interactive command-line client
+- HTTP-based architecture
+
+Permission Model
+
+Each claimed file contains:
+
+- Owner Token
+- Admin Token
+- Read Token
+- Write Token
+- Append Token
+
+Owner:
+
+- Full control
+- Can change admin token
+- Can modify all permissions
+
+Admin:
+
+- Full access to file contents
+- Can modify read/write/append permissions
+- Cannot modify owner token
+- Cannot modify admin token
+
+Read Token:
+
+- Grants read access
+
+Write Token:
+
+- Grants overwrite access
+
+Append Token:
+
+- Grants append access
+
+------------<<Architecture>>
+
+Storage:
+
+files/
+
+- file contents
+
+tokens/
+
+- permission metadata
+
+Example:
+
+main.py
+
+main.py.tokens
+
+The token file stores metadata such as:
+
+{
+	"owner": "...",
+	"admin": "...",
+	"r": "...",
+	"w": "...",
+	"a": "..."
+}
+
+Server Setup
+
+Install dependencies:
+
+pip install -r requirements.txt
+
+Run:
+
+python pnds_server2.py
+
+Default server:
+
+http://127.0.0.1:5000
+
+Client Usage
+
+Run:
+
+python pnds2.py
+
+Commands:
+
+create <filename> <content>
+
+read <filename>
+
+append <filename> <content>
+
+claim <filename> <owner_token>
+
+modify <filename> <admin_token> <json>
+
+list
+
+tokens <filename> <token>
+
+upload <localfile>
+
+download <filename>
+
+settoken <token>
+
+
+-----------<<Motivation>>
+
+
+The project was developed incrementally from a simple file transfer system. Each new requirement led to additional protocol layers:
+
+File Transfer
+→ Multiple Files
+→ Session Management
+→ Ownership
+→ Token Permissions
+
+PNDS2 is the result of that evolution.
+
+
+-----------<<Future Ideas>>
+
+
+- Folder support
+- Virtual storage structures
+- Messaging protocols
+- Synchronization systems
+- Distributed file routing
